@@ -8,6 +8,7 @@ from sqlalchemy import create_engine, func
 
 from flask import Flask, jsonify
 
+
 #################################################
 # Database Setup
 #################################################
@@ -87,10 +88,10 @@ def tobs():
 
     # Find temperature observations of most active station
     stationName = activeStations[0][0]
-    temperature = session.query(measure.tobs).filter(measure.station == stationName).filter(measure.date >= previousYear).all()
+    temperature = session.query(measure.tobs).filter(measure.station == stationName).filter(measure.date >= prev_year).all()
     print('Successful tobs query')
     session.close()
-    return jsonify([i[0] for i in temperature])
+    return jsonify([i[0] for i in temps])
 
 @app.route('/api/v1.0/<start>')
 def temps_start(start):
